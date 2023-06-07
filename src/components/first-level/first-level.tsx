@@ -1,4 +1,6 @@
-import { BluePlus } from "../../data/svg";
+import { useState } from "react";
+import { BlueMinus, BluePlus } from "../../data/svg";
+import "./first-level.scss";
 
 interface FirstLeveProps {
   index: number;
@@ -6,9 +8,16 @@ interface FirstLeveProps {
 }
 
 const FirstLevel = ({ index, title }: FirstLeveProps) => {
+  const [clicked, setClicked] = useState(false);
+
+  const handleClick = () => {
+    setClicked(!clicked);
+  };
+
   return (
-    <div key={index}>
-      {BluePlus} <p>{title}</p>
+    <div className="first-level" key={index} onClick={handleClick}>
+      {!clicked && BluePlus} {clicked && BlueMinus}
+      <p>{title}</p>
     </div>
   );
 };
