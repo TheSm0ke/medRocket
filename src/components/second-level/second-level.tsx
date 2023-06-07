@@ -1,16 +1,14 @@
-import { useState } from "react";
-import loaderSrc from "../../data/loader.gif";
+import { useEffect, useState } from "react";
+import Loader from "../loader/loader";
 
 const SecondLevel = () => {
   const [loading, setLoading] = useState(true);
-  const loader = (
-    <>
-      <img src={loaderSrc} alt="loader" />
-      <div onClick={() => setLoading(false)}>cancel</div>
-    </>
-  );
 
-  return <div>{loading && loader}</div>;
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+
+  return <div>{loading && <Loader loadingStatus={loading} />}</div>;
 };
 
 export default SecondLevel;
