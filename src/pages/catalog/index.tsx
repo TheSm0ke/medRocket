@@ -13,11 +13,7 @@ const Catalog = () => {
       });
   }, []);
 
-  return (
-    <div>
-      <AllCatalog data={allUsers} />
-    </div>
-  );
+  return <AllCatalog data={allUsers} />;
 };
 
 export default Catalog;
