@@ -1,4 +1,4 @@
-import { BluePlus } from "../data/svg";
+import { BluePlus } from "../../data/svg";
 
 interface FirstLeveProps {
   index: number;
