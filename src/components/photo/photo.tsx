@@ -6,9 +6,10 @@ import "./photo.scss";
 interface PhotoProps {
   src: string;
   alt: string;
+  starClicked?: boolean;
 }
 
-const Photo = ({ src, alt }: PhotoProps) => {
+const Photo = ({ src, alt, starClicked }: PhotoProps) => {
   const [showToolTip, setShowToolTip] = useState(false);
   const [starClick, setStarClick] = useState(false);
   const [starSrc, setStarSrc] = useState(starDeactive);
@@ -19,12 +20,16 @@ const Photo = ({ src, alt }: PhotoProps) => {
   };
 
   useEffect(() => {
+    if (starClicked) setStarClick(true);
+  }, [starClicked]);
+
+  useEffect(() => {
     if (starClick) {
       setStarSrc(starActive);
     } else {
       setStarSrc(starDeactive);
     }
-  }, [starClick]);
+  }, [starClick, starClicked]);
 
   const handleHover = (el: any) => {
     setShowToolTip(true);

@@ -6,7 +6,10 @@ const Routing = () => {
   return (
     <Routes>
       <Route path="*" element={<Catalog />} />
-      <Route path="/favorites" element={<Favorites />} />
+      <Route
+        path="/favorites"
+        element={<Favorites listFavorites={localStorage.getItem("listFavorites")} />}
+      />
     </Routes>
   );
 };

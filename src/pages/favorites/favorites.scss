@@ -1,0 +1,19 @@
+.favorites {
+  display: flex;
+  width: 744px;
+  gap: 42px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.favorites-photo-alt {
+  width: 150px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #787878;
+}
