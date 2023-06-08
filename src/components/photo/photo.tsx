@@ -2,21 +2,24 @@ import { useEffect, useState } from "react";
 import starDeactive from "../../data/star_empty.png";
 import starActive from "../../data/star_active.png";
 import "./photo.scss";
+import Modal from "../modal/modal";
 
 interface PhotoProps {
   src: string;
+  bigSrc: string;
   alt: string;
   starClicked?: boolean;
   idPhoto: number;
 }
 
-const Photo = ({ src, alt, starClicked, idPhoto }: PhotoProps) => {
+const Photo = ({ src, alt, starClicked, idPhoto, bigSrc }: PhotoProps) => {
   const [showToolTip, setShowToolTip] = useState(false);
   const [starClick, setStarClick] = useState(false);
   const [starSrc, setStarSrc] = useState(starDeactive);
   const [positionXY, setPositionXY] = useState({});
+  const [modalOpen, setModalOpen] = useState(false);
 
-  const handleClick = (sendPhoto: any) => {
+  const handleClickOnStar = (sendPhoto: any) => {
     setStarClick(!starClick);
     if (starClick === false) {
       localStorage.getItem("listFavorites");
@@ -47,11 +50,11 @@ const Photo = ({ src, alt, starClicked, idPhoto }: PhotoProps) => {
     if (
       localStorage
         .getItem("listFavorites")
-        ?.includes(JSON.stringify({ id: idPhoto, src, alt }))
+        ?.includes(JSON.stringify({ id: idPhoto, src, alt, bigSrc }))
     )
       setStarClick(true);
     if (starClicked) setStarClick(true);
-  }, [alt, idPhoto, src, starClicked]);
+  }, [alt, bigSrc, idPhoto, src, starClicked]);
 
   useEffect(() => {
     if (starClick) {
@@ -70,13 +73,17 @@ const Photo = ({ src, alt, starClicked, idPhoto }: PhotoProps) => {
   };
 
   return (
-    <div
-      className="photo"
-      onMouseMove={handleHover}
-      onMouseLeave={() => setShowToolTip(false)}>
-      <img src={src} alt={alt} />
+    <div className="photo">
+      {modalOpen && <Modal onClick={() => setModalOpen(false)} src={bigSrc} />}
       <img
-        onClick={() => handleClick({ id: idPhoto, src, alt })}
+        onMouseMove={handleHover}
+        onMouseLeave={() => setShowToolTip(false)}
+        onClick={() => setModalOpen(true)}
+        src={src}
+        alt={alt}
+      />
+      <img
+        onClick={() => handleClickOnStar({ id: idPhoto, src, alt, bigSrc })}
         className="photo-star"
         src={starSrc}
         alt="Звезда"

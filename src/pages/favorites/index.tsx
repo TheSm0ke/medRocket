@@ -17,7 +17,13 @@ const Favorites = () => {
           const jsonEl = JSON.parse(el);
           return (
             <div className="favorites-photo">
-              <Photo src={jsonEl.src} starClicked alt={jsonEl.alt} idPhoto={jsonEl.id} />
+              <Photo
+                src={jsonEl.src}
+                starClicked
+                alt={jsonEl.alt}
+                idPhoto={jsonEl.id}
+                bigSrc={jsonEl.bigSrc}
+              />
               <p className="favorites-photo-alt">{jsonEl.alt}</p>
             </div>
           );
@@ -48,7 +54,11 @@ const Favorites = () => {
       </>
     );
 
-  return <div className="favorites">{allFavorites}</div>;
+  return (
+    <>
+      <div className="favorites">{allFavorites}</div>
+    </>
+  );
 };
 
 export default Favorites;

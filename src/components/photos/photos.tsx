@@ -21,7 +21,13 @@ const Photos = ({ albumId }: PhotosProps) => {
         setPhotos(
           json.map((el: photo) => {
             return (
-              <Photo key={el.id} idPhoto={el.id} src={el.thumbnailUrl} alt={el.title} />
+              <Photo
+                key={el.id}
+                idPhoto={el.id}
+                src={el.thumbnailUrl}
+                alt={el.title}
+                bigSrc={el.url}
+              />
             );
           })
         );
