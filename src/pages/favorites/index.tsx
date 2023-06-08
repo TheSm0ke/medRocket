@@ -2,9 +2,11 @@ import Photo from "../../components/photo/photo";
 import { useEffect, useState } from "react";
 import emptyImg from "../../data/empty.png";
 import "./favorites.scss";
+import Loader from "../../components/loader/loader";
 
 const Favorites = () => {
   const [allFavorites, setAllFavorites] = useState<JSX.Element>(<></>);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (localStorage.getItem("listFavorites") !== "") {
@@ -22,7 +24,7 @@ const Favorites = () => {
         }
         return <></>;
       });
-      console.log(jsxPhoto);
+      setLoading(false);
       setAllFavorites(<>{jsxPhoto}</>);
     }
   }, []);
@@ -32,13 +34,16 @@ const Favorites = () => {
     allFavorites === <></>
   )
     return (
-      <div className="favorites">
-        <div className="favorites-empty">
-          <img src={emptyImg} alt="Пустой список" />
-          <h2>Список избранного пуст</h2>
-          <p style={{ margin: "0px" }}>Добавляйте изображения, нажимая на звездочки</p>
+      <>
+        <Loader loadingStatus={loading} />
+        <div className="favorites">
+          <div className="favorites-empty">
+            <img src={emptyImg} alt="Пустой список" />
+            <h2>Список избранного пуст</h2>
+            <p style={{ margin: "0px" }}>Добавляйте изображения, нажимая на звездочки</p>
+          </div>
         </div>
-      </div>
+      </>
     );
 
   return <div className="favorites">{allFavorites}</div>;

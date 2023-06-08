@@ -19,6 +19,7 @@ const Photo = ({ src, alt, starClicked, idPhoto }: PhotoProps) => {
   const handleClick = (sendPhoto: any) => {
     setStarClick(!starClick);
     if (starClick === false) {
+      localStorage.getItem("listFavorites");
       localStorage.setItem(
         "listFavorites",
         String(
@@ -43,8 +44,14 @@ const Photo = ({ src, alt, starClicked, idPhoto }: PhotoProps) => {
   };
 
   useEffect(() => {
+    if (
+      localStorage
+        .getItem("listFavorites")
+        ?.includes(JSON.stringify({ id: idPhoto, src, alt }))
+    )
+      setStarClick(true);
     if (starClicked) setStarClick(true);
-  }, [starClicked]);
+  }, [alt, idPhoto, src, starClicked]);
 
   useEffect(() => {
     if (starClick) {
@@ -52,7 +59,7 @@ const Photo = ({ src, alt, starClicked, idPhoto }: PhotoProps) => {
     } else {
       setStarSrc(starDeactive);
     }
-  }, [starClick, starClicked]);
+  }, [starClick]);
 
   const handleHover = (el: any) => {
     setShowToolTip(true);
