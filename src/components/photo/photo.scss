@@ -1,5 +1,6 @@
 .photo {
-
+  width: 150px;
+  height: 150px;
 }
 
 .photo:hover {
@@ -16,4 +17,10 @@
   color: white;
   background: rgba(0, 0, 0, 0.69);
   border-radius: 4px;
+}
+
+.photo-star {
+  position: relative;
+  left: 114px;
+  top: -147px;
 }
