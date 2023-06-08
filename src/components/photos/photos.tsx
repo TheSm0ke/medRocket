@@ -16,7 +16,9 @@ const Photos = ({ albumId }: PhotosProps) => {
       .then((json) => {
         setPhotos(
           json.map((el: photo) => {
-            return <Photo key={el.id} src={el.thumbnailUrl} alt={el.title} />;
+            return (
+              <Photo key={el.id} idPhoto={el.id} src={el.thumbnailUrl} alt={el.title} />
+            );
           })
         );
       });

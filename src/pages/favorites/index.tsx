@@ -1,29 +1,45 @@
 import Photo from "../../components/photo/photo";
+import { useEffect, useState } from "react";
 import emptyImg from "../../data/empty.png";
 import "./favorites.scss";
 
-interface FavoritesProps {
-  listFavorites: any;
-}
+const Favorites = () => {
+  const [allFavorites, setAllFavorites] = useState<JSX.Element>(<></>);
 
-const Favorites = ({ listFavorites }: FavoritesProps) => {
-  if (listFavorites?.length === 0 || listFavorites == null)
+  useEffect(() => {
+    if (localStorage.getItem("listFavorites") !== "") {
+      const allPhotoId = localStorage.getItem("listFavorites")?.split(";");
+      console.log(allPhotoId);
+      const jsxPhoto = allPhotoId?.map((el) => {
+        if (el.length > 0) {
+          const jsonEl = JSON.parse(el);
+          return (
+            <div className="favorites-photo">
+              <Photo src={jsonEl.src} starClicked alt={jsonEl.alt} idPhoto={jsonEl.id} />
+              <p className="favorites-photo-alt">{jsonEl.alt}</p>
+            </div>
+          );
+        }
+        return <></>;
+      });
+      console.log(jsxPhoto);
+      setAllFavorites(<>{jsxPhoto}</>);
+    }
+  }, []);
+
+  if (
+    localStorage.getItem("listFavorites")?.trim().length === 0 &&
+    allFavorites === <></>
+  )
     return (
       <div className="favorites">
-        <img src={emptyImg} alt="Пустой список" />
-        <h2>Список избранного пуст</h2>
-        <p style={{ margin: "0px" }}>Добавляйте изображения, нажимая на звездочки</p>
+        <div className="favorites-empty">
+          <img src={emptyImg} alt="Пустой список" />
+          <h2>Список избранного пуст</h2>
+          <p style={{ margin: "0px" }}>Добавляйте изображения, нажимая на звездочки</p>
+        </div>
       </div>
     );
-
-  const allFavorites = listFavorites.map((el: any) => {
-    return (
-      <div className="favorites-photo">
-        <Photo starClicked src={el.url} alt={el.alt} />
-        <p className="favorites-photo-alt">{el.alt}</p>
-      </div>
-    );
-  });
 
   return <div className="favorites">{allFavorites}</div>;
 };

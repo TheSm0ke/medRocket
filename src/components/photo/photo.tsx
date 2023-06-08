@@ -7,16 +7,39 @@ interface PhotoProps {
   src: string;
   alt: string;
   starClicked?: boolean;
+  idPhoto: number;
 }
 
-const Photo = ({ src, alt, starClicked }: PhotoProps) => {
+const Photo = ({ src, alt, starClicked, idPhoto }: PhotoProps) => {
   const [showToolTip, setShowToolTip] = useState(false);
   const [starClick, setStarClick] = useState(false);
   const [starSrc, setStarSrc] = useState(starDeactive);
   const [positionXY, setPositionXY] = useState({});
 
-  const handleClick = () => {
+  const handleClick = (sendPhoto: any) => {
     setStarClick(!starClick);
+    if (starClick === false) {
+      localStorage.setItem(
+        "listFavorites",
+        String(
+          localStorage
+            .getItem("listFavorites")
+            ?.trim()
+            .concat(`${JSON.stringify(sendPhoto)};`)
+        )
+      );
+      console.log(localStorage.getItem("listFavorites"));
+    } else {
+      localStorage.setItem(
+        "listFavorites",
+        String(
+          localStorage
+            .getItem("listFavorites")
+            ?.replace(`${JSON.stringify(sendPhoto)};`, "")
+        ).trim()
+      );
+      console.log(localStorage.getItem("listFavorites"));
+    }
   };
 
   useEffect(() => {
@@ -45,7 +68,12 @@ const Photo = ({ src, alt, starClicked }: PhotoProps) => {
       onMouseMove={handleHover}
       onMouseLeave={() => setShowToolTip(false)}>
       <img src={src} alt={alt} />
-      <img onClick={handleClick} className="photo-star" src={starSrc} alt="Звезда" />
+      <img
+        onClick={() => handleClick({ id: idPhoto, src, alt })}
+        className="photo-star"
+        src={starSrc}
+        alt="Звезда"
+      />
       {showToolTip && (
         <div className="photo-tooltip" style={positionXY}>
           {alt}
