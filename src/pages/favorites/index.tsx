@@ -9,7 +9,7 @@ const Favorites = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (localStorage.getItem("listFavorites") !== "") {
+    if (Number(localStorage.getItem("listFavorites")?.length) > 0) {
       const allPhotoId = localStorage.getItem("listFavorites")?.split(";");
       console.log(allPhotoId);
       const jsxPhoto = allPhotoId?.map((el) => {
@@ -26,11 +26,13 @@ const Favorites = () => {
       });
       setLoading(false);
       setAllFavorites(<>{jsxPhoto}</>);
+    } else {
+      setLoading(false);
     }
   }, []);
 
   if (
-    localStorage.getItem("listFavorites")?.trim().length === 0 &&
+    Number(localStorage.getItem("listFavorites")?.length) === 0 ||
     allFavorites === <></>
   )
     return (

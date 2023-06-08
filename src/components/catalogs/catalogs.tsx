@@ -18,10 +18,10 @@ const Catalogs = ({ data, isLoad }: AllCatalogProps) => {
   });
 
   return (
-    <div className="all-catalog">
+    <>
       <Loader loadingStatus={isLoad} />
-      {allUsers}
-    </div>
+      <div className="all-catalog">{allUsers}</div>
+    </>
   );
 };
 

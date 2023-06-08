@@ -41,11 +41,13 @@ const Albums = ({ userId }: AlbumsProps) => {
   ));
 
   return (
-    <div className="albums">
-      {error && <ErrorPage />}
+    <>
       <Loader loadingStatus={loading} />
-      {albums}
-    </div>
+      <div className="albums">
+        {error && <ErrorPage />}
+        {albums}
+      </div>
+    </>
   );
 };
 

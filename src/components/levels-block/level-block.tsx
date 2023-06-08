@@ -18,8 +18,8 @@ const LevelBlocks = ({ children, title, onClick }: LevelBlocksProps) => {
 
   return (
     <div className="level">
-      <div className="level-header" onClick={handleClick}>
-        <div className="level-status">
+      <div className="level-header">
+        <div className="level-status" onClick={handleClick}>
           {!clicked && BluePlus} {clicked && BlueMinus}
         </div>
         <div className="level-titile">{title}</div>
