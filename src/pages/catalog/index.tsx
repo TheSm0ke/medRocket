@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { dataUser, USER_URL } from "../../data/data";
-import { AllCatalog } from "../../components/all-catalog/all-catalog";
+import Catalogs from "../../components/catalogs/catalogs";
 
 const Catalog = () => {
   const [allUsers, setAllUsers] = useState<dataUser[]>([]);
@@ -16,7 +16,7 @@ const Catalog = () => {
       });
   }, [loading]);
 
-  return <AllCatalog data={allUsers} />;
+  return <Catalogs data={allUsers} />;
 };
 
 export default Catalog;

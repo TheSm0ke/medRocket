@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { BlueMinus, BluePlus } from "../../data/svg";
-import SecondLevel from "../second-level/second-level";
-import "./first-level.scss";
+import Albums from "../albums/albums";
+import "./users.scss";
 
-interface FirstLeveProps {
+interface UsersProps {
   index: number;
   title: string;
 }
 
-const FirstLevel = ({ index, title }: FirstLeveProps) => {
+const Users = ({ index, title }: UsersProps) => {
   const [clicked, setClicked] = useState(false);
 
   const handleClick = () => {
@@ -17,10 +17,10 @@ const FirstLevel = ({ index, title }: FirstLeveProps) => {
 
   return (
     <div className="first-level" key={index} onClick={handleClick}>
-      {!clicked && BluePlus} {clicked && BlueMinus} {clicked && <SecondLevel />}
+      {!clicked && BluePlus} {clicked && BlueMinus} {clicked && <Albums userId={index} />}
       <p>{title}</p>
     </div>
   );
 };
 
-export default FirstLevel;
+export default Users;
