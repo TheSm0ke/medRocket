@@ -1,20 +1,26 @@
 import { dataUser } from "../../data/data";
-import Users from "../users/users";
+import Albums from "../albums/albums";
+import LevelBlocks from "../levels-block/level-block";
 import Loader from "../loader/loader";
 import "./catalogs.scss";
 
 interface AllCatalogProps {
   data: dataUser[];
+  isLoad: boolean;
 }
-const Catalogs = ({ data }: AllCatalogProps) => {
+const Catalogs = ({ data, isLoad }: AllCatalogProps) => {
   const allUsers = data.map((el: dataUser) => {
-    return <Users index={el.id} title={el.name} />;
+    return (
+      <LevelBlocks title={el.name}>
+        <Albums userId={el.id} />
+      </LevelBlocks>
+    );
   });
 
   return (
     <div className="all-catalog">
-      <Loader loadingStatus />
-      <>{allUsers}</>
+      <Loader loadingStatus={isLoad} />
+      {allUsers}
     </div>
   );
 };

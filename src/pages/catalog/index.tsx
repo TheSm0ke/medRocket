@@ -12,11 +12,11 @@ const Catalog = () => {
       .then((data) => {
         loading;
         setAllUsers(data);
-        setLoading(true);
+        setLoading(false);
       });
   }, [loading]);
 
-  return <Catalogs data={allUsers} />;
+  return <Catalogs data={allUsers} isLoad={loading} />;
 };
 
 export default Catalog;
