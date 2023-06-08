@@ -21,6 +21,12 @@ const Photo = ({ src, alt, starClicked, idPhoto, bigSrc }: PhotoProps) => {
 
   const handleClickOnStar = (sendPhoto: any) => {
     setStarClick(!starClick);
+    if (
+      localStorage.getItem("listFavorites") === null ||
+      localStorage.getItem("listFavorites") === undefined
+    )
+      localStorage.setItem("listFavorites", "");
+
     if (starClick === false) {
       localStorage.getItem("listFavorites");
       localStorage.setItem(

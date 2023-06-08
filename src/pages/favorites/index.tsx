@@ -38,7 +38,9 @@ const Favorites = () => {
 
   if (
     Number(localStorage.getItem("listFavorites")?.length) === 0 ||
-    allFavorites === <></>
+    allFavorites === <></> ||
+    localStorage.getItem("listFavorites") === undefined ||
+    localStorage.getItem("listFavorites") === null
   )
     return (
       <>
