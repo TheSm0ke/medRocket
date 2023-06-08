@@ -9,10 +9,10 @@ interface AllCatalogProps {
   isLoad: boolean;
 }
 const Catalogs = ({ data, isLoad }: AllCatalogProps) => {
-  const allUsers = data.map((el: dataUser) => {
+  const allUsers = data.map((user: dataUser) => {
     return (
-      <LevelBlocks title={el.name} key={el.id}>
-        <Albums userId={el.id} />
+      <LevelBlocks title={user.name} key={user.id}>
+        <Albums userId={user.id} />
       </LevelBlocks>
     );
   });

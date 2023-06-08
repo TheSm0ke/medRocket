@@ -19,14 +19,14 @@ const Photos = ({ albumId }: PhotosProps) => {
       .then((data) => data.json())
       .then((json) => {
         setPhotos(
-          json.map((el: photo) => {
+          json.map((photo: photo) => {
             return (
               <Photo
-                key={el.id}
-                idPhoto={el.id}
-                src={el.thumbnailUrl}
-                alt={el.title}
-                bigSrc={el.url}
+                key={photo.id}
+                idPhoto={photo.id}
+                src={photo.thumbnailUrl}
+                alt={photo.title}
+                bigSrc={photo.url}
               />
             );
           })

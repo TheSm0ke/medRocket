@@ -32,7 +32,6 @@ const Photo = ({ src, alt, starClicked, idPhoto, bigSrc }: PhotoProps) => {
             .concat(`${JSON.stringify(sendPhoto)};`)
         )
       );
-      console.log(localStorage.getItem("listFavorites"));
     } else {
       localStorage.setItem(
         "listFavorites",
@@ -42,7 +41,6 @@ const Photo = ({ src, alt, starClicked, idPhoto, bigSrc }: PhotoProps) => {
             ?.replace(`${JSON.stringify(sendPhoto)};`, "")
         ).trim()
       );
-      console.log(localStorage.getItem("listFavorites"));
     }
   };
 
@@ -64,11 +62,11 @@ const Photo = ({ src, alt, starClicked, idPhoto, bigSrc }: PhotoProps) => {
     }
   }, [starClick]);
 
-  const handleHover = (el: any) => {
+  const handleHover = (mouseMove: any) => {
     setShowToolTip(true);
     setPositionXY({
-      left: `${el.pageX + 20}px`,
-      top: `${el.pageY + 20}px`,
+      left: `${mouseMove.pageX + 20}px`,
+      top: `${mouseMove.pageY + 20}px`,
     });
   };
 

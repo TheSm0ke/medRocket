@@ -11,20 +11,19 @@ const Favorites = () => {
   useEffect(() => {
     if (Number(localStorage.getItem("listFavorites")?.length) > 0) {
       const allPhotoId = localStorage.getItem("listFavorites")?.split(";");
-      console.log(allPhotoId);
-      const jsxPhoto = allPhotoId?.map((el) => {
-        if (el.length > 0) {
-          const jsonEl = JSON.parse(el);
+      const jsxPhoto = allPhotoId?.map((photoFromJson) => {
+        if (photoFromJson.length > 0) {
+          const photoObj = JSON.parse(photoFromJson);
           return (
             <div className="favorites-photo">
               <Photo
-                src={jsonEl.src}
+                src={photoObj.src}
                 starClicked
-                alt={jsonEl.alt}
-                idPhoto={jsonEl.id}
-                bigSrc={jsonEl.bigSrc}
+                alt={photoObj.alt}
+                idPhoto={photoObj.id}
+                bigSrc={photoObj.bigSrc}
               />
-              <p className="favorites-photo-alt">{jsonEl.alt}</p>
+              <p className="favorites-photo-alt">{photoObj.alt}</p>
             </div>
           );
         }
