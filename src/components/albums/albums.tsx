@@ -28,8 +28,8 @@ const Albums = ({ userId }: AlbumsProps) => {
   }, [userId]);
 
   const albums = albumsFromApi.map((el: albums) => (
-    <LevelBlocks onClick={handleClick} title={el.title}>
-      <Photos />
+    <LevelBlocks onClick={handleClick} title={el.title} key={el.id}>
+      <Photos albumId={el.id} />
     </LevelBlocks>
   ));
 

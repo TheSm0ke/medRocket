@@ -31,3 +31,11 @@ export interface albums {
   title: string;
   userId: number;
 }
+
+export interface photo {
+  albumId: number;
+  id: number;
+  title: string;
+  url: string;
+  thumbnailUrl: string;
+}

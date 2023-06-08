@@ -11,7 +11,7 @@ interface AllCatalogProps {
 const Catalogs = ({ data, isLoad }: AllCatalogProps) => {
   const allUsers = data.map((el: dataUser) => {
     return (
-      <LevelBlocks title={el.name}>
+      <LevelBlocks title={el.name} key={el.id}>
         <Albums userId={el.id} />
       </LevelBlocks>
     );
